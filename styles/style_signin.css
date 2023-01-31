@@ -44,8 +44,9 @@ form {
   flex-direction: column;
   row-gap: 1rem;
   box-sizing: border-box;
-  padding-top: .5em;
+  padding-top: 0.5em;
   min-height: 50%;
+  flex-basis: auto;
 }
 
 @media only screen and (min-height: 730px) {
@@ -87,7 +88,7 @@ form {
   row-gap: 0.5em;
 }
 
-.button-container{
+.button-container {
   display: flex;
 }
 
@@ -106,8 +107,21 @@ input {
   border-style: unset;
   border-radius: 5px;
   height: 2em;
+  position: relative;
 }
 
 a {
   all: unset;
+}
+
+.error-container {
+  box-sizing: border-box;
+  font-size: 0.6em;
+  padding-inline: 0.5em;
+  text-align: center;
+}
+
+.error-container span {
+  display: inline-block;
+  display: none;
 }

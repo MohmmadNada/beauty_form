@@ -1,12 +1,12 @@
-:root{
-    --header-text-color: #545454;
-    --box-shadow: rgb(0 255 255 / 70%) 0px 0.2em 0.5em;
-    --form-background: #e1dcf5ea;
-    --icon-background: #3c4bb3;
-    --radio-box-shadow: 0 0 12px blue;
-    --p-shadow: 0.2em 0.2em 0.2em grey;
-    --button-text-color: #ffffff;
-    --gradient-background: radial-gradient(circle, #00d4ff 0%, #000000 100%)
+:root {
+  --header-text-color: #545454;
+  --box-shadow: rgb(0 255 255 / 70%) 0px 0.2em 0.5em;
+  --form-background: #e1dcf5ea;
+  --icon-background: #3c4bb3;
+  --radio-box-shadow: 0 0 12px blue;
+  --p-shadow: 0.2em 0.2em 0.2em grey;
+  --button-text-color: #ffffff;
+  --gradient-background: radial-gradient(circle, #00d4ff 0%, #000000 100%);
 }
 
 html,
@@ -24,7 +24,7 @@ body {
   background-image: var(--gradient-background);
 }
 
-form{
+form {
   width: 75vw;
   height: 70vh;
 }
@@ -56,7 +56,8 @@ form{
   color: var(--header-text-color);
 }
 
-.input-field, .main-dev:has(> #error-msg) {
+.input-field,
+.main-dev:has(> #error-msg) {
   grid-column: 2 span;
 }
 
@@ -101,7 +102,6 @@ input[name="gender"] {
   z-index: 2;
   position: absolute;
   opacity: 0;
-  opacity: 0.2;
 }
 
 .gender-icon {
@@ -112,28 +112,27 @@ input[name="gender"] {
   border-radius: 50%;
 }
 
-
 input:checked + i {
-    background-color: var(--button-text-color);
-    box-shadow: var(--radio-box-shadow);
+  background-color: var(--button-text-color);
+  box-shadow: var(--radio-box-shadow);
 }
 
 p {
-    text-shadow: var(--p-shadow);
+  text-shadow: var(--p-shadow);
 }
 
 p > a {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 button {
-    background-color: var(--icon-background);
-    color: var(--button-text-color);
-    padding: 0.5em;
-    border: none;
-    border-radius: 8px;
-    scale: 1.5;
-    align-self: left;
+  background-color: var(--icon-background);
+  color: var(--button-text-color);
+  padding: 0.5em;
+  border: none;
+  border-radius: 8px;
+  scale: 1.5;
+  align-self: left;
 }
 
 @media only screen and (min-width: 750px) {
@@ -143,12 +142,57 @@ button {
 }
 
 @media only screen and (min-width: 800px) {
-    form {
-        width: 40vw;
-      }
-      #container{
-        padding: 0% 5%;
-      }
+  form {
+    width: 40vw;
+  }
+
+  #container {
+    padding: 0% 5%;
+  }
 }
 
-/* TODO: Style the error msg */
+.validation-check {
+  position: absolute;
+  right: 5px;
+  display: none;
+}
+
+@keyframes error-animation {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  50% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+.error-container {
+  right: 0;
+  width: 25%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  margin-top: 5%;
+  position: fixed;
+  transform: translateX(100%);
+}
+
+.error-animation {
+  animation: error-animation 7s;
+}
+
+.error-msg {
+  box-sizing: border-box;
+  padding: 0.8em;
+  border-radius: 5px;
+  background-color: var(--form-background);
+  opacity: 0.6;
+  min-height: 5%;
+}
