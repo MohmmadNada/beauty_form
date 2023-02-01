@@ -1,4 +1,5 @@
-import { User } from "../models/user_model.js";
+import User from "../models/user_model.js";
+
 const inputAttrs = {
   check: {
     iconClass: "validation-check",
@@ -26,12 +27,18 @@ const inputAttrs = {
 
 class CountryComponent {
   constructor(form) {
+    CountryComponent.createCountryList(form);
+  }
+  static createCountryList(form) {
     const countryListContainer = document.createElement("div");
-    countryListContainer.classList.add("main-dev");
+    countryListContainer.classList.add("main-div");
     countryListContainer.classList.add("input-field");
+    // Do it one line
     const selectList = document.createElement("select");
     selectList.setAttribute("id", "country");
-    let countries = {
+    // Move it Outer
+    // [{label: "country", value:""}]
+    const countries = {
       default: {
         countryName: "Country",
         countryValue: "",
@@ -45,39 +52,46 @@ class CountryComponent {
         countryValue: "UK",
       },
     };
+    // TODO: ...
     Object.values(countries).forEach((country) => {
       let countryElement = document.createElement("option");
-      countryElement.value = country["countryValue"];
-      countryElement.textContent = country["countryName"];
+      countryElement.value = country.countryValue;
+      countryElement.textContent = country.countryName;
       selectList.appendChild(countryElement);
     });
     countryListContainer.appendChild(selectList);
     form.appendChild(countryListContainer);
   }
+  // For Consistency
+  static isCountrySelected() {
+    const selectedCountry = document.getElementById("country").value;
+    if (!selectedCountry) {
+      return false;
+    }
+    return true;
+  }
 }
 class InputComponent {
   constructor(from, InputType) {
+    // TODO: Move it to static fun
     const InputContainer = document.createElement("div");
-    InputContainer.classList.add("main-dev");
+    InputContainer.classList.add("main-div");
     InputContainer.classList.add("input-field");
     const labelElement = document.createElement("label");
     labelElement.setAttribute("for", InputType);
     const iconElement = document.createElement("i");
-    iconElement.className = inputAttrs[InputType]["iconClass"];
+    iconElement.className = inputAttrs[InputType].iconClass;
     labelElement.appendChild(iconElement);
     const inputField = document.createElement("input");
     inputField.setAttribute("name", InputType);
     inputField.setAttribute("id", InputType);
-    inputField.setAttribute(
-      "placeholder",
-      inputAttrs[InputType]["placeholder"]
-    );
+    inputField.setAttribute("placeholder", inputAttrs[InputType].placeholder);
     inputField.setAttribute(
       "type",
       InputType.includes("password") ? "password" : "text"
     );
     const checkSpan = document.createElement("span");
-    checkSpan.className = inputAttrs["check"]["iconClass"];
+    checkSpan.className = inputAttrs.check.iconClass;
     checkSpan.textContent = "&#x2718;";
     InputContainer.appendChild(labelElement);
     InputContainer.appendChild(inputField);
@@ -133,12 +147,12 @@ class UsernameComponent extends InputComponent {
   }
 }
 
-class Password1Component extends InputComponent {
+class PasswordComponent extends InputComponent {
   constructor() {
     super(document.querySelector("#container"), "password-1");
     document
       .getElementById("password-1")
-      .addEventListener("input", Password1Component.isValidPassword);
+      .addEventListener("input", PasswordComponent.isValidPassword);
   }
 
   static isValidPassword() {
@@ -149,6 +163,9 @@ class Password1Component extends InputComponent {
     validationIcon.style.display = "inline";
     let isMeetPasswordReqs = [];
     // Check if it contain at least one Capital letter
+    // Change test
+    // Refactor
+    // Try switch
     if (
       /[A-Z]/.test(firstPassword.value) &&
       /[a-z]/.test(firstPassword.value)
@@ -195,13 +212,16 @@ class ConfirmPasswordComponent extends InputComponent {
 
   static isPasswordMatch() {
     const firstPassword = document.getElementById("password-1");
-    // On submit
     const secondPassword = document.getElementById("password-2");
     const validationIcon = document.querySelector(
       `#${secondPassword.id} + .validation-check`
     );
     validationIcon.style.display = "inline";
-    if (!firstPassword.value.length) {
+    // TODO: Refactor
+    if (
+      !firstPassword.value.length &&
+      secondPassword.value == firstPassword.value
+    ) {
       validationIcon.innerHTML = "&#x2718;";
       return false;
     }
@@ -217,15 +237,16 @@ class ConfirmPasswordComponent extends InputComponent {
 
 class GenderRadioComponent {
   constructor(form, genderType) {
+    // TODO: Use static to create
     const ButtonsContainer = document.createElement("div");
-    ButtonsContainer.classList.add("main-dev");
+    ButtonsContainer.classList.add("main-div");
     const maleRadioButton = document.createElement("input");
     maleRadioButton.setAttribute("type", "radio");
     maleRadioButton.setAttribute("name", "gender");
     maleRadioButton.setAttribute("id", genderType);
     ButtonsContainer.appendChild(maleRadioButton);
     const genderIconCheck = document.createElement("i");
-    genderIconCheck.className = inputAttrs["genderCheck"]["iconClass"];
+    genderIconCheck.className = inputAttrs.genderCheck.iconClass;
     ButtonsContainer.appendChild(genderIconCheck);
     const genderLabel = document.createElement("label");
     genderLabel.setAttribute("for", genderType);
@@ -234,26 +255,55 @@ class GenderRadioComponent {
     ButtonsContainer.appendChild(genderLabel);
     form.appendChild(ButtonsContainer);
   }
+  static isGenderSelected() {
+    if (document.querySelector('[id="female"]').checked) {
+      return "female";
+    } else if (document.querySelector('[id="male"]').checked) {
+      return "male";
+    }
+    return false;
+  }
 }
+
 class SignUpForm {
   constructor() {
     const formElement = SignUpForm.createSignUpForm();
     SignUpForm.createRegistrationHeader(formElement);
     new EmailComponent();
     new UsernameComponent();
-    new Password1Component();
+    new PasswordComponent();
     new ConfirmPasswordComponent();
     new CountryComponent(formElement);
     new GenderRadioComponent(formElement, "male");
     new GenderRadioComponent(formElement, "female");
     SignUpForm.createAgreeTermsComponent(formElement);
     SignUpForm.createRegisterButton(formElement);
+    document.getElementsByTagName("form");
+    // TODO: Use static method
+    // On submit
+    // https://www.w3schools.com/jsref/event_onsubmit.asp
+    document.querySelector("form").addEventListener("submit", (e) => {
+      // e.preventDefault();
+      const invalidFields = SignUpForm.getInvalidInputFields();
+      if (invalidFields.length) {
+        new ErrorMessage(invalidFields);
+      } else {
+        // target.country
+        new User(
+          document.getElementById("email").value,
+          document.getElementById("username").value,
+          document.getElementById("password-1").value,
+          document.getElementById("country").value,
+          document.querySelector('[name="gender"]:checked').id
+        );
+      }
+    });
   }
 
   static createSignUpForm() {
     const formElement = document.createElement("form");
     formElement.setAttribute("action", "./home_page.html");
-    formElement.setAttribute("method", "get");
+    // formElement.setAttribute("method", "get");
     document.body.appendChild(formElement);
     const containerDiv = document.createElement("div");
     containerDiv.setAttribute("id", "container");
@@ -262,8 +312,9 @@ class SignUpForm {
   }
 
   static createRegistrationHeader(form) {
+    // Title
     const headerElement = document.createElement("div");
-    headerElement.classList.add("main-dev");
+    headerElement.classList.add("main-div");
     headerElement.classList.add("registration-header");
     headerElement.textContent = "Registration";
     form.appendChild(headerElement);
@@ -271,24 +322,48 @@ class SignUpForm {
 
   static createAgreeTermsComponent(form) {
     const agreeTermContainer = document.createElement("div");
-    agreeTermContainer.classList.add("main-dev");
+    agreeTermContainer.classList.add("main-div");
     const pElement = document.createElement("p");
     pElement.textContent = "By clicking Register, you agree on";
     const aElement = document.createElement("a");
     aElement.setAttribute("href", "./home_page.html");
-    aElement.textContent = "terms and conditions";
+    aElement.textContent = " terms and conditions";
     pElement.appendChild(aElement);
     agreeTermContainer.appendChild(pElement);
     form.appendChild(agreeTermContainer);
   }
+
   static createRegisterButton(form) {
     const submitButtonContainer = document.createElement("div");
-    submitButtonContainer.classList.add("main-dev");
+    submitButtonContainer.classList.add("main-div");
     const submitButton = document.createElement("button");
     submitButton.setAttribute("type", "submit");
     submitButton.textContent = "Register";
     submitButtonContainer.appendChild(submitButton);
     form.appendChild(submitButtonContainer);
+  }
+
+  static getInvalidInputFields() {
+    let invalidFields = [];
+    if (!EmailComponent.isValidEmail()) {
+      invalidFields.push("email");
+    }
+    if (!UsernameComponent.isValidUsername()) {
+      invalidFields.push("username");
+    }
+    if (!PasswordComponent.isValidPassword()) {
+      invalidFields.push("password");
+    }
+    if (!ConfirmPasswordComponent.isPasswordMatch()) {
+      invalidFields.push("confirmPassword");
+    }
+    if (!CountryComponent.isCountrySelected()) {
+      invalidFields.push("country");
+    }
+    if (!GenderRadioComponent.isGenderSelected()) {
+      invalidFields.push("gender");
+    }
+    return invalidFields;
   }
 }
 class SignUpErrorComponent {
@@ -307,122 +382,46 @@ class SignUpPage {
 
 new SignUpPage();
 
-const formElement = document.getElementsByTagName("form");
+class ErrorMessage {
+  constructor(errorTypes) {
+    ErrorMessage.removePreErrors();
+    ErrorMessage.createErrorMessages(errorTypes);
+    ErrorMessage.showErrorDiv();
+  }
 
-document.querySelector("form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  // Prevent Default =>
-  let meetReq = new Set();
-  let emailValue;
-  let usernameValue;
-  let passwordValue;
-  let countryValue;
-  let genderValue;
-  document
-    .querySelector("div.error-container")
-    .classList.remove("error-animation");
-  removePreErrors();
-  if (!isValidEmail()) {
-    createErrorMsg("email");
-    meetReq.add(false);
-  } else {
-    emailValue = isValidEmail();
+  static createErrorMessages(errorTypes) {
+    // Outer
+    const errorMessages = {
+      email: "Invalid Email Address",
+      username: "Invalid Username",
+      password: "Invalid Password",
+      confirmPassword: "Those Passwords didn't match",
+      country: "Select country",
+      gender: "Select Gender",
+    };
+    errorTypes.forEach((errorType) => {
+      const errorElement = document.createElement("div");
+      errorElement.classList.add("error-msg");
+      errorElement.innerText = errorMessages[errorType];
+      document.querySelector("div.error-container").appendChild(errorElement);
+    });
   }
-  if (!isValidUsername()) {
-    createErrorMsg("username");
-    meetReq.add(false);
-  } else {
-    usernameValue = isValidUsername();
-  }
-  if (!isValidPassword()) {
-    createErrorMsg("first password");
-    meetReq.add(false);
-  } else {
-    passwordValue = isValidPassword();
-  }
-  if (!isPasswordMatch()) {
-    createErrorMsg("second password");
-    meetReq.add(false);
-  }
-  if (!isCountrySelected()) {
-    createErrorMsg("country");
-    meetReq.add(false);
-  } else {
-    countryValue = isCountrySelected();
-  }
-  if (!isGenderSelected()) {
-    createErrorMsg("gender");
-    meetReq.add(false);
-  } else {
-    genderValue = isGenderSelected();
-  }
-  window.setTimeout(function () {
-    document
-      .querySelector("div.error-container")
-      .classList.add("error-animation");
-  }, 10);
-  if (!meetReq.has(false)) {
-    const userObj = new User(
-      emailValue,
-      usernameValue,
-      passwordValue,
-      countryValue,
-      genderValue
-    );
-    let userSerialized = JSON.stringify(userObj);
-    localStorage.setItem("User", userSerialized);
-    let userDeserialized = JSON.parse(localStorage.getItem("User"));
-    location.href = "./home_page.html";
-  }
-});
 
-function isCountrySelected() {
-  let select = document.querySelector("select");
-  let selectedOption = select.options[select.selectedIndex];
-  return selectedOption.value == false ? false : selectedOption.value;
-}
-
-function isGenderSelected() {
-  if (document.querySelector('[id="female"]').checked) {
-    return "female";
-  } else if (document.querySelector('[id="male"]').checked) {
-    return "male";
+  static removePreErrors() {
+    const parentDiv = document.querySelector(".error-container");
+    parentDiv.classList.remove("error-animation");
+    let child = parentDiv.lastElementChild;
+    while (child) {
+      parentDiv.removeChild(child);
+      child = parentDiv.lastElementChild;
+    }
   }
-  return false;
-}
 
-function createErrorMsg(errorType) {
-  const errorsTypes = {
-    country: "Select Country",
-    gender: "Select Gender",
-    "first password":
-      "The password must have One or more Capital letters, \
-      special char and number & The length must be more than 7 chars",
-    "second password": "Those passwords didn’t match",
-    username: "The user name must start with letter",
-    email: "invalid email address",
-    "empty field": "The empty field/s must be filled",
-  };
-  if (
-    errorType === "empty field" &&
-    document.getElementById("empty-field-error")
-  ) {
-    return;
-  }
-  const errorElement = document.createElement("div");
-  if (errorType === "empty field") {
-    errorElement.setAttribute("id", "empty-field-error");
-  }
-  errorElement.classList.add("error-msg");
-  errorElement.innerText = errorsTypes[errorType];
-  document.querySelector("div.error-container").appendChild(errorElement);
-}
-
-function removePreErrors() {
-  const parentDiv = document.querySelector(".error-container");
-  let child = parentDiv.lastElementChild;
-  while (child) {
-    parentDiv.removeChild(child);
-    child = parentDiv.lastElementChild;
+  static showErrorDiv() {
+    window.setTimeout(() => {
+      document
+        .querySelector("div.error-container")
+        .classList.add("error-animation");
+    }, 10);
   }
 }

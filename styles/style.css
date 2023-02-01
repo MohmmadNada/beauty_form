@@ -40,7 +40,7 @@ form {
   padding: 2% 5%;
 }
 
-.main-dev {
+.main-div {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,7 +57,7 @@ form {
 }
 
 .input-field,
-.main-dev:has(> #error-msg) {
+.main-div:has(> #error-msg) {
   grid-column: 2 span;
 }
 
@@ -136,7 +136,7 @@ button {
 }
 
 @media only screen and (min-width: 750px) {
-  .main-dev i {
+  .main-div i {
     scale: 1.5;
   }
 }

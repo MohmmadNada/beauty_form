@@ -5,7 +5,13 @@ class User {
     this.password = password;
     this.country = country;
     this.gender = gender;
+    User.addUserToLocalStorage(this)
+  }
+
+  static addUserToLocalStorage(user){
+    let userSerialized = JSON.stringify(user); 
+    localStorage.setItem("User", userSerialized);
   }
 }
 
-export { User };
+export default User;
