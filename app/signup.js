@@ -1,30 +1,5 @@
 import User from "../models/user_model.js";
-
-const inputAttrs = {
-  check: {
-    iconClass: "validation-check",
-  },
-  email: {
-    iconClass: "fa-regular fa-envelope",
-    placeholder: "Email",
-  },
-  username: {
-    iconClass: "fa-regular fa-user",
-    placeholder: "User Name",
-  },
-  "password-1": {
-    iconClass: "fa-solid fa-shield-halved",
-    placeholder: "Password",
-  },
-  "password-2": {
-    iconClass: "fa-solid fa-shield-halved",
-    placeholder: "Confirm Password",
-  },
-  genderCheck: {
-    iconClass: "fa-solid fa-circle-check gender-icon",
-  },
-};
-
+import { inputAttrs, countries, errorMessages } from "../constants.js";
 class CountryComponent {
   constructor(form) {
     CountryComponent.createCountryList(form);
@@ -33,30 +8,12 @@ class CountryComponent {
     const countryListContainer = document.createElement("div");
     countryListContainer.classList.add("main-div");
     countryListContainer.classList.add("input-field");
-    // Do it one line
     const selectList = document.createElement("select");
     selectList.setAttribute("id", "country");
-    // Move it Outer
-    // [{label: "country", value:""}]
-    const countries = {
-      default: {
-        countryName: "Country",
-        countryValue: "",
-      },
-      US: {
-        countryName: "United State",
-        countryValue: "US",
-      },
-      UK: {
-        countryName: "United kingdom",
-        countryValue: "UK",
-      },
-    };
-    // TODO: ...
-    Object.values(countries).forEach((country) => {
+    countries.forEach(({ label, value }) => {
       let countryElement = document.createElement("option");
-      countryElement.value = country.countryValue;
-      countryElement.textContent = country.countryName;
+      countryElement.value = value;
+      countryElement.textContent = label;
       selectList.appendChild(countryElement);
     });
     countryListContainer.appendChild(selectList);
@@ -73,7 +30,10 @@ class CountryComponent {
 }
 class InputComponent {
   constructor(from, InputType) {
-    // TODO: Move it to static fun
+    InputComponent.createInputField(from, InputType);
+  }
+
+  static createInputField(from, InputType) {
     const InputContainer = document.createElement("div");
     InputContainer.classList.add("main-div");
     InputContainer.classList.add("input-field");
@@ -163,9 +123,6 @@ class PasswordComponent extends InputComponent {
     validationIcon.style.display = "inline";
     let isMeetPasswordReqs = [];
     // Check if it contain at least one Capital letter
-    // Change test
-    // Refactor
-    // Try switch
     if (
       /[A-Z]/.test(firstPassword.value) &&
       /[a-z]/.test(firstPassword.value)
@@ -217,27 +174,22 @@ class ConfirmPasswordComponent extends InputComponent {
       `#${secondPassword.id} + .validation-check`
     );
     validationIcon.style.display = "inline";
-    // TODO: Refactor
-    if (
-      !firstPassword.value.length &&
-      secondPassword.value == firstPassword.value
-    ) {
+    if (!firstPassword.value || secondPassword.value != firstPassword.value) {
       validationIcon.innerHTML = "&#x2718;";
       return false;
     }
     if (secondPassword.value == firstPassword.value) {
       validationIcon.innerHTML = "&#10003;";
       return true;
-    } else {
-      validationIcon.innerHTML = "&#x2718;";
-      return false;
     }
   }
 }
 
 class GenderRadioComponent {
   constructor(form, genderType) {
-    // TODO: Use static to create
+    GenderRadioComponent.createGenderRadio(form, genderType);
+  }
+  static createGenderRadio(form, genderType) {
     const ButtonsContainer = document.createElement("div");
     ButtonsContainer.classList.add("main-div");
     const maleRadioButton = document.createElement("input");
@@ -278,32 +230,11 @@ class SignUpForm {
     new GenderRadioComponent(formElement, "female");
     SignUpForm.createAgreeTermsComponent(formElement);
     SignUpForm.createRegisterButton(formElement);
-    document.getElementsByTagName("form");
-    // TODO: Use static method
-    // On submit
-    // https://www.w3schools.com/jsref/event_onsubmit.asp
-    document.querySelector("form").addEventListener("submit", (e) => {
-      // e.preventDefault();
-      const invalidFields = SignUpForm.getInvalidInputFields();
-      if (invalidFields.length) {
-        new ErrorMessage(invalidFields);
-      } else {
-        // target.country
-        new User(
-          document.getElementById("email").value,
-          document.getElementById("username").value,
-          document.getElementById("password-1").value,
-          document.getElementById("country").value,
-          document.querySelector('[name="gender"]:checked').id
-        );
-      }
-    });
+    SignUpForm.addEventToForm();
   }
 
   static createSignUpForm() {
     const formElement = document.createElement("form");
-    formElement.setAttribute("action", "./home_page.html");
-    // formElement.setAttribute("method", "get");
     document.body.appendChild(formElement);
     const containerDiv = document.createElement("div");
     containerDiv.setAttribute("id", "container");
@@ -312,7 +243,6 @@ class SignUpForm {
   }
 
   static createRegistrationHeader(form) {
-    // Title
     const headerElement = document.createElement("div");
     headerElement.classList.add("main-div");
     headerElement.classList.add("registration-header");
@@ -365,6 +295,24 @@ class SignUpForm {
     }
     return invalidFields;
   }
+  static addEventToForm() {
+    document.querySelector("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const invalidFields = SignUpForm.getInvalidInputFields();
+      if (invalidFields.length) {
+        new ErrorMessage(invalidFields);
+      } else {
+        new User(
+          document.getElementById("email").value,
+          document.getElementById("username").value,
+          document.getElementById("password-1").value,
+          document.getElementById("country").value,
+          document.querySelector('[name="gender"]:checked').id
+        );
+        window.location.href = "../pages/home_page.html";
+      }
+    });
+  }
 }
 class SignUpErrorComponent {
   constructor() {
@@ -390,15 +338,6 @@ class ErrorMessage {
   }
 
   static createErrorMessages(errorTypes) {
-    // Outer
-    const errorMessages = {
-      email: "Invalid Email Address",
-      username: "Invalid Username",
-      password: "Invalid Password",
-      confirmPassword: "Those Passwords didn't match",
-      country: "Select country",
-      gender: "Select Gender",
-    };
     errorTypes.forEach((errorType) => {
       const errorElement = document.createElement("div");
       errorElement.classList.add("error-msg");
