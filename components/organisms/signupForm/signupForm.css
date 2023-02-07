@@ -1,0 +1,48 @@
+@import url("../../atoms/header/header.css");
+@import url("../../molecules/inputBlock/inputBlock.css");
+@import url("../../molecules/selectList/selectList.css");
+@import url("../../molecules/genderCheckBlock/genderCheckBlock.css");
+@import url("../../molecules/agreeTermsBlock/agreeTermsBlock.css");
+@import url("../../atoms/button/button.css");
+@import url("../../atoms/form/form.css");
+form {
+    width: 65vw;
+    /* height: 70vh; */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 11fr);
+    row-gap: 1em;
+
+}
+@media only screen and (min-width: 900px){
+    form {
+        width: 40vw;
+    }
+}
+
+h1 {
+    grid-column: 2 span;
+    grid-row: 2 span;
+}
+
+.input-block-container, .country-list-container {
+    grid-column: 2 span;
+    height: max(25px, 100%);
+}
+
+input[name="gender"] {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+button {
+    justify-self: center;
+    align-self: center;
+}
+
+.missing-field-error{
+    font-size: 0.5em;
+    grid-column: 2 span;
+    color: #ff0000
+}

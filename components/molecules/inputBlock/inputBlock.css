@@ -1,0 +1,29 @@
+@import url("../iconLabel/iconLabel.css");
+@import url("../../atoms/input/input.css");
+
+.input-block-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 10px;
+}
+
+.input-block-container label {
+    width: 20%;
+    height: 100%;
+    padding: 5px 0;
+    box-sizing: border-box;
+}
+
+.input-block-container input {
+    width: 80%;
+    height: 100%;
+}
+
+.input-block-container span{
+    position: absolute;
+    right: 5px;
+    display: none;
+}

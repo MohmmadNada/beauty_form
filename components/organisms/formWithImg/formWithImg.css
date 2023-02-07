@@ -1,0 +1,39 @@
+@import url("../signinForm/signinForm.css");
+@import url("../../molecules/imageBlock/imageBlock.css");
+
+#container {
+    width: 65%;
+    height: 70%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+img {
+    width: 100%;
+}
+
+form {
+    border-radius: 10px 10px 0 0 ;
+}
+
+.missing-field-error {
+    font-size: 0.5em;
+    color: #ff0000
+}
+
+@media only screen and (min-width: 900px) {
+    #container {
+        width: 55%;
+        height: 35%;
+        flex-direction: row;
+        overflow: visible;
+    }
+    img {
+        width: fit-content;
+        height: 100%;
+    }
+    form {
+        border-radius: 10px 0 0 10px;
+    }
+}

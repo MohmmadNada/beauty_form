@@ -1,0 +1,10 @@
+button {
+    border: none;
+    background-color: #3c4bb3;
+    color: #ffffff;
+    border-radius: 8px;
+    box-sizing: border-box;
+    width: fit-content;
+    height: fit-content;
+    padding: 1.2em 1em;
+}

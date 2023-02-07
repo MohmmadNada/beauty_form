@@ -1,0 +1,35 @@
+@import url("../../atoms/radioButton/radioButton.css");
+@import url("../../atoms/icon/icon.css");
+@import url("../../atoms/label/label.css");
+
+.gender-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    /* width: 30%; */
+    /* height: 60px; */
+}
+
+input[name="gender"] {
+    position: absolute;
+    opacity: 0;
+}
+
+input[name="gender"] + i {
+    color: #3c4bb3;
+    margin-right: 0.5em;
+    border-radius: 50%;
+    background-color: #3c4bb3;
+}
+
+input[name="gender"]:checked + i {
+    background-color: #ffffff;
+    box-shadow: 0 0 12px blue;
+    background-color: red;
+
+}
+
+input[name="gender"] ~ label {
+    background-color: unset;
+}

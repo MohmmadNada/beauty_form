@@ -1,0 +1,6 @@
+@import url("../../atoms/paragraph/paragraph.css");
+@import url("../../atoms/link/link.css");
+
+p {
+    text-shadow: 0.2em 0.2em 0.2em grey;
+}
