@@ -3,6 +3,7 @@ import Form from "../../atoms/form/form.js"
 import Header from "../../atoms/header/header.js"
 import InputBlock from "../../molecules/inputBlock/inputBlock.js"
 import Paragraph from "../../atoms/paragraph/paragraph.js"
+
 export default class SigninForm {
     constructor(parentElement = document.body){
         const formElement = new Form()
@@ -16,12 +17,6 @@ export default class SigninForm {
             formElement.appendChild(element)
         });
         parentElement.appendChild(formElement)
-        SigninForm.addRealTimeValidationToTextInput()
-        formElement.addEventListener(
-            "submit", (e) => {
-                e.preventDefault();
-                SigninForm.signinFormValidation(e)
-            })
         return formElement
     }
 
@@ -37,7 +32,6 @@ export default class SigninForm {
     }
 
     static signinFormValidation(e) {
-        // put it to function
         let preErrors = document.querySelector(".missing-field-error")
         if (preErrors) {
             preErrors.remove()
@@ -61,5 +55,13 @@ export default class SigninForm {
         } else {
             e.target.appendChild(new Paragraph("The account doesn't exist, Try again", "missing-field-error"))
         }
-      }
+    }
+
+    static activateForm() {
+        document.querySelector("form").addEventListener(
+            "submit", (e) => {
+                e.preventDefault();
+                SigninForm.signinFormValidation(e)
+            })
+    }
 }

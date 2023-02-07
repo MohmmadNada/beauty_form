@@ -9,7 +9,7 @@ import User from "../../../utils/models/userModel.js";
 import Paragraph from "../../atoms/paragraph/paragraph.js";
 import { errorMessages } from "../../../utils/constants.js";
 
-class SignupForm {
+export default class SignupForm {
     constructor() {
         const formElement = new Form()
         const formElements = [
@@ -27,9 +27,7 @@ class SignupForm {
         formElements.forEach(element => {
             formElement.appendChild(element)
         });
-        document.body.appendChild(formElement)
-        SignupForm.addRealTimeValidationToTextInput()
-        SignupForm.addSubmitEvent()
+
         return formElement
     }
     static addRealTimeValidationToTextInput() {
@@ -100,5 +98,3 @@ class SignupForm {
         });
     }
 }
-
-new SignupForm

@@ -5,9 +5,8 @@ export default class FormWithImg {
     constructor(){
         const container = document.createElement("div");
         container.setAttribute("id", "container");
-        document.body.appendChild(container);
         new SigninForm(container);
         new ImageBlock(container);
+        return container
     }
 }
-new FormWithImg()
