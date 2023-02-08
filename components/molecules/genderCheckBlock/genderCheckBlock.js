@@ -3,7 +3,7 @@ import Icon from "../../atoms/icon/icon.js";
 import Label from "../../atoms/label/label.js";
 
 export default class GenderCheckBlock {
-    constructor(genderType) {
+    constructor({genderType}) {
         const genderRadioButton = new RadioButton("gender", genderType);
         const checkIcon = new Icon("genderCheck");
         const genderLabel = new Label(genderType);

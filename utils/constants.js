@@ -71,5 +71,67 @@ const countries = [
   },
 ];
 
+const signupElements = [
+  {
+    className: "Header",
+    text: "Registration",
+  },
+  {
+    className: "InputBlock",
+    inputType: "email",
+  },
+  {
+    className: "InputBlock",
+    inputType: "username",
 
-export { inputAttrs, errorMessages, countries, iconClass, radioButtonsAttrs }
+  },
+  {
+    className: "InputBlock",
+    inputType: "password",
+
+  },
+  {
+    className: "InputBlock",
+    inputType: "confirmPassword",
+
+  },
+  {
+    className: "SelectList",
+  },
+  {
+    className: "GenderCheckBlock",
+    genderType: "male",
+  },
+  {
+    className: "GenderCheckBlock",
+    genderType: "female",
+  },
+  {
+    className: "AgreeTermsBlock",
+  },
+  {
+    className: "Button",
+    text: "Registration",
+  }
+]
+
+const signinElements = [
+  {
+    className: "Header",
+    text: "Sign In",
+  },
+  {
+    className: "InputBlock",
+    inputType: "email",
+  },
+  {
+    className: "InputBlock",
+    inputType: "password",
+  },
+  {
+    className: "Button",
+    text: "Sign In",
+  },
+]
+
+export { inputAttrs, errorMessages, countries, iconClass, radioButtonsAttrs, signupElements, signinElements }

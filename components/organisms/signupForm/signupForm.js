@@ -1,33 +1,16 @@
-import Header from "../../atoms/header/header.js";
 import InputBlock from "../../molecules/inputBlock/inputBlock.js";
 import SelectList from "../../molecules/selectList/selectList.js";
 import GenderCheckBlock from "../../molecules/GenderCheckBlock/GenderCheckBlock.js";
-import AgreeTermsBlock from "../../molecules/agreeTermsBlock/agreeTermsBlock.js";
-import Button from "../../atoms/button/button.js"
 import Form from "../../atoms/form/form.js";
 import User from "../../../utils/models/userModel.js";
 import Paragraph from "../../atoms/paragraph/paragraph.js";
-import { errorMessages } from "../../../utils/constants.js";
+import { errorMessages, signupElements } from "../../../utils/constants.js";
+import { addElementsToElement} from "../../../utils/generalUtils.js";
 
 export default class SignupForm {
     constructor() {
         const formElement = new Form()
-        const formElements = [
-            new Header("Registration"),
-            new InputBlock("email"),
-            new InputBlock("username"),
-            new InputBlock("password"),
-            new InputBlock("confirmPassword"),
-            new SelectList(),
-            new GenderCheckBlock("male"),
-            new GenderCheckBlock("female"),
-            new AgreeTermsBlock(),
-            new Button("submit", "Registration"),
-        ]
-        formElements.forEach(element => {
-            formElement.appendChild(element)
-        });
-
+        addElementsToElement(signupElements, formElement)
         return formElement
     }
 
