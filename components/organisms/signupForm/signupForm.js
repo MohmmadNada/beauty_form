@@ -30,6 +30,7 @@ export default class SignupForm {
 
         return formElement
     }
+
     static addRealTimeValidationToTextInput() {
         document.getElementById("email").addEventListener(
             "input",
@@ -71,6 +72,7 @@ export default class SignupForm {
         }
         return invalidFields;
     }
+
     static addSubmitEvent() {
         document.querySelector("form").addEventListener("submit", (e) => {
             e.preventDefault();

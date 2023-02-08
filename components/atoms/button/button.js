@@ -1,7 +1,7 @@
 export default class Button {
-    constructor(type, text) {
+    constructor(text) {
         const buttonElement = document.createElement("button");
-        buttonElement.setAttribute("type", type)
+        buttonElement.setAttribute("type", "submit")
         buttonElement.textContent = text
         return buttonElement
     }

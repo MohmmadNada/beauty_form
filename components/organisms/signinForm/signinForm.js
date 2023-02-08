@@ -11,7 +11,7 @@ export default class SigninForm {
             new Header("Sign In"),
             new InputBlock("email"),
             new InputBlock("password"),
-            new Button("submit", "Sign In"),
+            new Button("Sign In"),
         ]
         formElements.forEach(element => {
             formElement.appendChild(element)
