@@ -1,5 +1,6 @@
 class User {
-    constructor(email, username, password, country, gender) {
+  constructor(email, username, password, country, gender) {
+
       this.email = email;
       this.username = username;
       this.password = password;
@@ -8,9 +9,9 @@ class User {
       User.addUserToLocalStorage(this)
     }
   
-    static addUserToLocalStorage(user){
-      let userSerialized = JSON.stringify(user); 
-      localStorage.setItem("User", userSerialized);
+  static addUserToLocalStorage(user) {
+    let userSerialized = JSON.stringify(user); 
+    localStorage.setItem("User", userSerialized);
     }
   }
   

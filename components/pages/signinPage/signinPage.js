@@ -1,5 +1,5 @@
-import FormWithImg from "../organisms/formWithImg/formWithImg.js"
-import SigninForm from "../organisms/signinForm/signinForm.js"
+import FormWithImg from "../../organisms/formWithImg/formWithImg.js"
+import SigninForm from "../../organisms/signinForm/signinForm.js"
 class SigninPage {
     constructor() {
         const container = new FormWithImg()

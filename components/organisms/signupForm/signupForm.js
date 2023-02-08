@@ -93,7 +93,7 @@ export default class SignupForm {
                     document.getElementById("country").value,
                     document.querySelector('[name="gender"]:checked').id
                 );
-                window.location.href = "../../atoms/pages/signInPage.html";
+                window.location.href = "../../components/pages/signinPage/signinPage.html";
             }
         });
     }

@@ -1,4 +1,4 @@
-import SignupForm from "../organisms/signupForm/signupForm.js"
+import SignupForm from "../../organisms/signupForm/signupForm.js"
 
 class SignupPage {
     constructor() {        
