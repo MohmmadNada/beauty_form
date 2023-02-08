@@ -19,7 +19,7 @@ form {
 
 .missing-field-error {
     font-size: 0.5em;
-    color: #ff0000
+    color: var(--error-color)
 }
 
 @media only screen and (min-width: 900px) {

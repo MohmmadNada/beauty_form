@@ -1,6 +1,6 @@
 select {
     border:  none;
-    border-radius: 8px;
-    color: #545454;
+    border-radius: var(--border-radius);
+    color: var(--input-text-color);
     padding-left: 0.6em;
 }

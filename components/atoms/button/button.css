@@ -1,8 +1,8 @@
 button {
     border: none;
-    background-color: #3c4bb3;
-    color: #ffffff;
-    border-radius: 8px;
+    background-color: var(--icon-background-color);
+    color: var(--icon-text-color);
+    border-radius: var(--border-radius);
     box-sizing: border-box;
     width: fit-content;
     height: fit-content;

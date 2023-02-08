@@ -1,6 +1,6 @@
 form {
-    border-radius: 10px;
+    border-radius: var(--border-radius);
     box-sizing: border-box;
     padding: 2% 5%;
-    background-color: #e1dcf5ea;
+    background-color: var(--form-background);
 }

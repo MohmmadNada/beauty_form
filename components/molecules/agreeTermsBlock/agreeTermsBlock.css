@@ -2,5 +2,5 @@
 @import url("../../atoms/link/link.css");
 
 p {
-    text-shadow: 0.2em 0.2em 0.2em grey;
+    text-shadow: 0.2em 0.2em 0.2em var(--text-shadow-color);
 }

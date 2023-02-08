@@ -7,7 +7,7 @@
     align-items: center;
     box-sizing: border-box;
     position: relative;
-    border-radius: 10px;
+    border-radius: var(--border-radius);
 }
 
 .input-block-container label {

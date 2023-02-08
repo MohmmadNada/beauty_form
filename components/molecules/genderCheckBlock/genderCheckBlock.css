@@ -7,8 +7,6 @@
     justify-content: center;
     align-items: center;
     position: relative;
-    /* width: 30%; */
-    /* height: 60px; */
 }
 
 input[name="gender"] {
@@ -17,16 +15,16 @@ input[name="gender"] {
 }
 
 input[name="gender"] + i {
-    color: #3c4bb3;
+    color: var(--icon-background-color);
     margin-right: 0.5em;
     border-radius: 50%;
-    background-color: #3c4bb3;
+    background-color: var(--icon-background-color);
 }
 
 input[name="gender"]:checked + i {
-    background-color: #ffffff;
+    background-color: var(--icon-text-color);
     box-shadow: 0 0 12px blue;
-    background-color: #ffffff;
+    background-color: var(--icon-text-color);
 
 }
 

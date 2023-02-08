@@ -5,15 +5,16 @@
 @import url("../../molecules/agreeTermsBlock/agreeTermsBlock.css");
 @import url("../../atoms/button/button.css");
 @import url("../../atoms/form/form.css");
+
 form {
     width: 65vw;
-    /* height: 70vh; */
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 11fr);
     row-gap: 1em;
 
 }
+
 @media only screen and (min-width: 900px){
     form {
         width: 40vw;
@@ -44,5 +45,5 @@ button {
 .missing-field-error{
     font-size: 0.5em;
     grid-column: 2 span;
-    color: #ff0000
+    color: var(--error-color);
 }

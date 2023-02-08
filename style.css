@@ -1,3 +1,13 @@
+:root{
+  --icon-background-color: #3c4bb3;
+  --icon-text-color: #ffffff;
+  --border-radius: 8px;
+  --form-background: #e1dcf5ea;
+  --heder-text-color: #545454;
+  --input-text-color: #545454;
+  --text-shadow-color: #808080;
+  --error-color: #ff0000;
+}
 html,
 body {
   padding: 0;

@@ -51,7 +51,7 @@ export default class SigninForm {
           email === registeredEmails &&
           userDeserialized.password == password
         ) {
-          location.href = "./pages/home_page.html";
+          location.href = "../../pages/homePage/homePage.html";
         } else {
             e.target.appendChild(new Paragraph("The account doesn't exist, Try again", "missing-field-error"))
         }
