@@ -38,4 +38,15 @@ const signinElements = [
     },
 ]
 
-export {signinElements}
+const agreeTermElements = [
+    {
+        className: "Paragraph",
+        classParam: "By clicking Register, you agree on"
+    },
+    {
+        className: "Link",
+        classParam: " terms and conditions"
+    }
+]
+
+export {signinElements, agreeTermElements}

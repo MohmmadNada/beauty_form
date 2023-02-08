@@ -4,7 +4,7 @@ import Label from "../../atoms/label/label.js";
 
 export default class GenderCheckBlock {
     constructor(genderType) {
-        const genderRadioButton = new RadioButton("gender", genderType);
+        const genderRadioButton = new RadioButton(genderType);
         const checkIcon = new Icon("genderCheck");
         const genderLabel = new Label(genderType);
         genderLabel.textContent = genderType.charAt(0).toUpperCase() + genderType.slice(1)

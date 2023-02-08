@@ -1,8 +1,8 @@
 export default class RadioButton {
-    constructor(inputName, inputId) {
+    constructor(inputId) {
         const radioButtonElement = document.createElement("input");
         radioButtonElement.setAttribute("type", "radio")
-        radioButtonElement.setAttribute("name", inputName)
+        radioButtonElement.setAttribute("name", "gender")
         radioButtonElement.setAttribute("id", inputId)
         return radioButtonElement
     }

@@ -1,10 +1,12 @@
 import Paragraph from "../../atoms/paragraph/paragraph.js";
 import Link from "../../atoms/link/link.js";
-
+import { agreeTermElements } from "../../../utils/elementItems.js"
+import {addElementsToForm} from "../../../utils/generalUtils.js"
 export default class AgreeTermsBlock {
     constructor() {
-        const pElement = new Paragraph("By clicking Register, you agree on")
-        const aElement = new Link(" terms and conditions", "https://medium.com/@janelle.wg/atomic-design-pattern-how-to-structure-your-react-application-2bb4d9ca5f97")
+        const allElements = addElementsToForm( agreeTermElements)
+        const pElement = allElements[0]
+        const aElement = allElements[1]
         pElement.appendChild(aElement);
         return pElement
     }
